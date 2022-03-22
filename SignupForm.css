@@ -1,0 +1,41 @@
+.signup-form-container {
+    max-height: 75vh;
+    width: 30vw;
+    overflow: scroll;
+    border-radius: 40px;
+    box-shadow: 0 30px 40px rgba(0, 0, 0, .3),
+    inset 10px 30px 40px #1d273adc;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    animation: 1s ease-in-out 0s 1 appear;
+    padding-top: 10vh;
+    padding-bottom: 2vh;
+}
+
+
+.email-container, .password-container{
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+}
+
+.login-buttons {
+    margin-top: 4vh;
+}
+
+.alert-message {
+    font-weight: 700;
+}
+
+.login-button {
+    color: #D1709E;
+    border: 3px solid #D1709E;
+    background-color: transparent;
+}
+
+.create-button{
+    background-color: #D1709E;
+    color: white;
+    border: none;
+}
