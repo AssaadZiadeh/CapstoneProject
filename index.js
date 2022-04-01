@@ -4,6 +4,8 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const finnhub = require('finnhub');
+const https = require('https');
+var axios = require("axios").default;
 
 
 
@@ -23,11 +25,6 @@ mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true}).the
 const Company = require('./models/company.js');
 const User = require('./models/user.js');
 
-
-//Connect with Stock API:
-const api_key = finnhub.ApiClient.instance.authentications['api_key'];
-api_key.apiKey = "c8h2ccqad3i9rgv9d7cg"
-const finnhubClient = new finnhub.DefaultApi()
 
 
 
@@ -58,29 +55,8 @@ app.post('/search-company-symbol', (req, res) => {
     });
 })
 
-app.post('/get-current-price-symbol', (req, res) => {
-    console.log(req.body.symbol);
-    finnhubClient.quote(req.body.symbol, (error, data, response) => {res.send({...data, symbol: req.body.symbol})});
-});
-
-app.post('/get-current-price-name', (req, res) => {
-    const companyName = req.body.name;
-    Company.findOne({Name: companyName}).then((result) => {
-        finnhubClient.quote(result.Symbol, (error, data, response) => {res.send({...data, symbol: result.Symbol})});
-    }).catch((error) => {
-        console.log(error.message)
-    })
-});
 
 
-app.post('/get-current-price-name', (req, res) => {
-    const companyName = req.body.name;
-    Company.findOne({Name: companyName}).then((result) => {
-        finnhubClient.quote(result.Symbol, (error, data, response) => {res.send({...data, symbol: result.Symbol})});
-    }).catch((error) => {
-        console.log(error.message)
-    })
-});
 
 app.post('/purchase-stock', (req, res) => {
 
@@ -132,3 +108,119 @@ app.post('/login-user', (req,res) => {
         }
     });
 })
+
+
+app.post('/get-prices', (req, res) => {
+
+    var symbolString = req.body.symbolString;
+
+    var options = {
+  method: 'GET',
+  url: 'https://yh-finance.p.rapidapi.com/market/v2/get-quotes',
+  params: {region: 'US', symbols: `${symbolString}`},
+  headers: {
+    'X-RapidAPI-Host': 'yh-finance.p.rapidapi.com',
+    'X-RapidAPI-Key': '7524583ebfmsh48d81ae8e516f24p181178jsn64c9e2150d68'
+  }
+};
+
+axios.request(options).then(function (response) {
+	console.log(response.data);
+    res.send(response.data);
+}).catch(function (error) {
+	console.error(error);
+});
+
+});
+
+
+app.post('/get-history-name', (req, res) => {
+
+        var name = req.body.name;
+        Company.findOne({Name: name}).then((result) => {
+            var symbol = result.Symbol;
+
+            var options = {
+            method: 'GET',
+            url: 'https://alpha-vantage.p.rapidapi.com/query',
+            params: {symbol: `${symbol}`, function: 'TIME_SERIES_MONTHLY', datatype: 'json'},
+            headers: {
+                'X-RapidAPI-Host': 'alpha-vantage.p.rapidapi.com',
+                'X-RapidAPI-Key': '7524583ebfmsh48d81ae8e516f24p181178jsn64c9e2150d68'
+            }
+            };
+
+            axios.request(options).then(function (response) {
+                console.log(response.data);
+                res.send(response.data);
+            }).catch(function (error) {
+                console.error(error);
+            });
+        }).catch((error) => {
+            console.log(error.message)
+        })
+
+});
+
+
+app.post('/get-history-symbol', (req, res) => {
+
+            var symbol = req.body.symbol;
+
+            var options = {
+            method: 'GET',
+            url: 'https://alpha-vantage.p.rapidapi.com/query',
+            params: {symbol: `${symbol}`, function: 'TIME_SERIES_MONTHLY', datatype: 'json'},
+            headers: {
+                'X-RapidAPI-Host': 'alpha-vantage.p.rapidapi.com',
+                'X-RapidAPI-Key': '7524583ebfmsh48d81ae8e516f24p181178jsn64c9e2150d68'
+            }
+            };
+
+            axios.request(options).then(function (response) {
+                console.log(response.data);
+                res.send(response.data);
+            }).catch(function (error) {
+                console.error(error);
+            });
+});
+
+
+app.post('/get-stock-price-symbol', (req, res) => {
+    const symbol = req.body.symbol;
+
+    var options = {
+        method: 'GET',
+        url: 'https://alpha-vantage.p.rapidapi.com/query',
+        params: {function: 'GLOBAL_QUOTE', symbol: `${symbol}`, datatype: 'json'},
+        headers: {
+            'X-RapidAPI-Host': 'alpha-vantage.p.rapidapi.com',
+            'X-RapidAPI-Key': '7524583ebfmsh48d81ae8e516f24p181178jsn64c9e2150d68'
+        }
+    };
+
+    axios.request(options).then(function (response) {
+        console.log(response.data);
+        res.send(response.data);
+    }).catch(function (error) {
+        console.error(error);
+    });
+});
+
+
+app.get("/market-status", (req, res) => {
+    
+    const options = {
+        method: 'GET',
+        url: 'https://financialmodelingprep.com/api/v3/is-the-market-open',
+        params: {apikey: '7d19b4dfb47f3efa815fb69544973395'},
+    };
+
+    axios.request(options).then(function (response) {
+        console.log(response.data);
+        res.send(response.data);
+    }).catch(function (error) {
+        console.error(error);
+    });
+})
+
