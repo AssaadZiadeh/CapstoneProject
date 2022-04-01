@@ -1,0 +1,234 @@
+.trade-container {
+    position: absolute;
+    right: 9vw;
+    top: 25vh;
+    height: 60vh;
+    width: 60vw;
+    border-radius: 1.5rem;
+    color: white;
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.3),
+    inset 0px 0px 15px #3340558c;
+    padding: 1rem;
+    overflow: scroll;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.company-input {
+    width: 23vw;
+    border: none;
+    box-shadow: 0px 0px 5px rgb(144, 223, 170);
+    color: white;
+}
+
+.search-container {
+    width: 100%;
+    height: 20vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 3vh;
+    margin-top: 5vh;
+}
+
+.search-section {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-header{
+    font-family: 'Roboto';
+    font-weight: 400;
+    font-size: 1rem;
+    text-align: left;
+    color: rgb(172, 172, 172);
+}
+
+.search-button {
+    margin-top: 5vh;
+    border: none;
+    color: white;
+    font-family: 'Roboto';
+    font-weight: 400;
+    font-size: 1rem;
+    color: rgb(144, 223, 170);
+    border: none;
+    width: 12vw;
+    box-shadow: 0px 0px 5px rgb(144, 223, 170);
+
+    transition: .2s ease-in-out;
+}
+
+.search-button:hover {
+    background-color:rgb(144, 223, 170);
+    color: white;
+    cursor: pointer;
+}
+
+.search-button:disabled {
+    color: grey;
+    opacity: .7;
+}
+
+.search-button:disabled:hover {
+    color: grey;
+    cursor: default;
+    opacity: .7;
+    background-color: transparent;
+}
+
+
+input#company-name-search,
+input#company-symbol-search, input#company-name-search::placeholder, input#company-symbol-search::placeholder {
+    color: white;
+    margin: 0;
+}
+
+#textfield-name {
+    color: white;
+}
+
+.css-16awh2u-MuiAutocomplete-root .MuiOutlinedInput-root, .company-input{
+    border-radius: 20px;
+    border: none;
+}
+
+.chart {
+    margin-top: 12vh;
+    width: 100%;
+}
+
+.loading-container{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    margin-top: 8vh;
+}
+
+.loading-text {
+    font-family: 'Roboto';
+    font-weight: 200;
+    margin-right: 1.5vw;
+}
+
+.stock-price-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.stock-price{ 
+    font-size: 1.75rem;
+    font-family: 'Roboto';
+    font-weight: 700;
+    margin-left: 1vw;
+}
+
+.stock-price-text {
+    font-size: 1.25rem;
+    font-family: 'Roboto';
+    font-weight: 300;
+}
+
+.purchase-info-container {
+    width: 100%;
+    height: 20vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 10vh;
+}
+
+.quantity-input {
+    border-radius: 20px;
+    font-size: 1rem;
+    font-weight: 300;
+    color:white;
+    color: white;
+    background-color: transparent;
+    border: none;
+    box-shadow: 0px 0px 5px rgb(144, 223, 170);
+    height: 6vh;
+    width: 15vw;
+    text-align: center;
+
+}
+
+.quantity-container,
+.purchase-type-container {
+    display: flex;
+    flex-direction : column;
+    justify-content: center;
+    align-items: center;
+}
+
+.quantity-container{
+    margin-right: 5vw;
+}
+
+input[type=number]::-webkit-inner-spin-button {
+    opacity: 0;
+}
+
+.options {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center ;
+}
+
+.option-text{
+    font-weight: 300;
+    font-size: 1rem;
+}
+
+
+.purchase-buttons-container {
+    margin-top: 10vh;
+    margin-bottom: 5vh;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.purchase-button,
+.new-search-button {
+    border: 2px solid rgb(144, 223, 170);
+    color: rgb(144, 223, 170);
+    font-weight: 600;
+    font-size: 1.15rem;
+    margin-left: 2vw;
+    margin-right: 2vw;
+    box-shadow: 0px 0px 5px rgb(144, 223, 170),
+    inset 0px 0px 5px rgb(144, 223, 170);
+}
+
+.purchase-button:hover, .new-search-button:hover {
+    cursor: pointer;
+    color: white;
+    background-color: rgb(144, 223, 170);
+}
+
+.purchase-button:disabled,
+.new-search-button:disabled,
+.purchase-button:hover:disabled,
+.new-search-button:hover:disabled {
+    cursor: default;
+    color: rgb(110, 107, 107);
+    box-shadow: none;
+    border: 1px solid grey;
+    background-color: transparent;
+}
