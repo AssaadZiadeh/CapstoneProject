@@ -9,7 +9,7 @@ import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import  axios  from 'axios';
 import FormControl from '@mui/material/FormControl';
 import InputAdornment from '@mui/material/InputAdornment';
-import InputLabel from '@mui/material/InputLabel';
+import CircularProgress from '@mui/material/CircularProgress';
 import IconButton from '@mui/material/IconButton';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import Visibility from '@mui/icons-material/Visibility';
@@ -23,6 +23,7 @@ export default function LoginForm() {
     const [password, setPassword] = useState("");
     const [loginError, setLoginError] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -44,6 +45,7 @@ export default function LoginForm() {
 
 
     const handleLogin = () => {
+        setLoading(true);
         const data = {
             email: email,
             password: password
@@ -53,7 +55,9 @@ export default function LoginForm() {
             if(!res.data) {
                 console.log("Empty object")
                 setLoginError(true);
+                setLoading(false);
             } else {
+              setLoading(false);
               dispatch(login(res.data));
               navigate('/dashboard/performance');
             }
@@ -68,18 +72,19 @@ export default function LoginForm() {
           <p className = "subtitle">Create an account or log <br />into yours</p>
       </div>
 
+      {loading && <CircularProgress /> }
       {loginError && Alert()}
       <div className="email-container">
         <div className="email-header">
           <MailIcon className="mail-icon"/>
           <p className="email">Email</p>
         </div>
-        <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+        <FormControl autoComplete="off" sx={{ m: 1, width: '25ch' }} variant="outlined">
           <OutlinedInput
             id="outlined-adornment-email"
-            autoComplete="off"
             type='email'
             value={email}
+            autoComplete="off"
             className="email-input"
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Please enter email..."
@@ -92,7 +97,7 @@ export default function LoginForm() {
               <PasswordIcon className="password-icon"/>
               <p className="password">Password</p>
             </div>
-            <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+            <FormControl autoComplete="off" sx={{ m: 1, width: '25ch' }} variant="outlined">
           <OutlinedInput
             id="outlined-adornment-password"
             type={showPassword ? 'text' : 'password'}
