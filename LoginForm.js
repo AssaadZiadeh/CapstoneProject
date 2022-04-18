@@ -59,7 +59,7 @@ export default function LoginForm() {
             } else {
               setLoading(false);
               dispatch(login(res.data));
-              navigate('/dashboard/performance');
+              navigate('/dashboard/portfolio');
             }
 
         });
