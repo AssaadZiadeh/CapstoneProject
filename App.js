@@ -12,7 +12,7 @@ function App() {
           </Route>
           <Route path="/dashboard/:section" element = {<Dashboard className="dashboard-page" />} >
           </Route>
-          <Route path="/" element = {<LandingPage className="landing-page" />} >
+          <Route path="*" element = {<LandingPage className="landing-page" />} >
           </Route>
         </Routes>
       </div>
