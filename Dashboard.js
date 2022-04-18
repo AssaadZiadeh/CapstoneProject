@@ -7,10 +7,14 @@ import Sidebar from './Sidebar.js';
 import Databar from './Databar.js';
 import '../Styles/Dashboard.css';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
-import Performance from './Performance.js';
+import PortfolioSummary from './PortfolioSummary.js';
 import Investments from './Investments';
 import Leaderboard from './Leaderboard';
+import CompanyProfile from './CompanyProfile.js';
 import Trade from './Trade';
+import Friend from './Friend';
+import Checkout from './Checkout.js';
+import Sale from "./Sale.js";
 
 
 export default function Dashboard() {
@@ -27,6 +31,7 @@ export default function Dashboard() {
   }
 
   useEffect(()=> {
+    console.log(section);
     if(!user) navigate('/');
   }, []);
 
@@ -36,10 +41,14 @@ export default function Dashboard() {
           <Databar user={user?user:null} />
           <LogoutOutlinedIcon onClick={handleLogout} className="logout-icon" />
           {
-            section==='performance'?<Performance />:
+            section==='portfolio'?<PortfolioSummary />:
             section==='investments'?<Investments />:
             section==='trade'?<Trade />:
-            section==='leaderboard'?<Leaderboard />:navigate('/')
+            section==='leaderboard'?<Leaderboard />:
+            section==='checkout'?<Checkout />:
+            section==='sale'?<Sale />:
+            section==='friend'?<Friend />:
+            section==='company'?<CompanyProfile />:navigate('/')
           } 
     </div>
   )
