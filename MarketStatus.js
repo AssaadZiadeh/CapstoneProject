@@ -23,26 +23,33 @@ export default function MarketStatus({marketStatus}) {
             flexDirection: 'row',
             justifyContent: 'space-evenly',
             alignItems: 'center',
-            marginBottom: '3vh',
+            marginBottom: '0vh',
             fontWeight: '500',
-            marginTop:'3vh',
+            border: '1px solid white',
+            marginTop:'2vh',
             textAlign: 'center',
             borderRadius: '.25rem',
+            height: '4vh',
             paddingLeft: '.5rem',
-            background: 'linear-gradient(to right, rgb(91, 246, 143), rgb(144, 223, 170))'}} >
+            background: 'linear-gradient(to right, rgb(91, 246, 143),#1BEFAA)'}} >
                 <p>Market is Currently Open </p><CheckCircleIcon />
             </div>
 
   const marketClosed = <div className="market-status"
         style={{
-            width: '20vw',
-            height: '20vh',
-            padding: '.5rem',
-            marginBottom: '3vh',
-            fontWeight: '500',
-            textAlign: 'center',
-            borderRadius: '.5rem',
-            paddingLeft: '.5rem',
+          width: '20vw',
+          display:'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-evenly',
+          alignItems: 'center',
+          marginBottom: '0vh',
+          fontWeight: '500',
+          border: '1px solid white',
+          marginTop:'6vh',
+          textAlign: 'center',
+          borderRadius: '.25rem',
+          height: '4vh',
+          paddingLeft: '.5rem',
             background: 'linear-gradient(to right, #D31027, #EA384D)',}} 
 
         onMouseEnter={handlePopoverOpen}
