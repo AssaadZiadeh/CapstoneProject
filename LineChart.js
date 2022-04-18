@@ -2,12 +2,12 @@ import React from 'react';
 import { Line as LineJS } from 'chart.js/auto'
 import { Line }            from 'react-chartjs-2'
 
-export default function LineChart({chartData}) {
+export default function LineChart({data}) {
   
     return (
       <div>
         <Line
-          data={chartData}
+          data={data}
           type='line'
           options={{
             title:{
