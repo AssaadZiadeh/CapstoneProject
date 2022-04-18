@@ -1,0 +1,95 @@
+.company-container {
+    position: absolute;
+    right: 9vw;
+    top: 25vh;
+    height: 60vh;
+    width: 60vw;
+    border-radius: 1.5rem;
+    color: white;
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.3),
+    inset 0px 0px 15px #3340558c;
+    padding: 1rem;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.chart-js {
+    width: 95%;
+    padding: 1rem;
+    border-radius: 1rem;
+    box-shadow: inset 0px 0px 15px rgba(0, 0, 0, 0.4);
+}
+
+.company-title{
+    width: 100%;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight:400;
+}
+
+.price {
+    font-size: 1.5rem;
+}
+
+.main-container{
+    height: 30vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: .75rem;
+    box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.4);
+}
+
+.data-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 200;
+    border-bottom: 1px solid white;
+}
+
+.half-table{
+    width: 28vw;
+}
+
+.numeric-data {
+    font-size: 1.2rem;
+    font-weight: 400;
+}
+
+.current-price {
+    margin-top: 1rem;
+    text-align: center;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.quantity-container {
+    margin-top: 5rem;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.quantity-input {
+    width: 15vw;
+    border: 1px solid white;
+    margin-left: 2rem;
+
+}
+
+.purchase-button, .new-search-button {
+    background-color: #1BEFAA !important;
+}

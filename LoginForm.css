@@ -92,11 +92,6 @@ body {
 }
 
 
-/* input:-webkit-autofill {
-    -webkit-background-fill-color: rgba(15, 20, 31, 0.48);
-    -webkit-text-fill-color: yellow !important;
-} */
-
 input:-internal-autofill-selected {
     background-color: transparent !important;
 }
@@ -136,18 +131,23 @@ select:-webkit-autofill {
     font-weight: 600;
     transition: 0.2s ease-in-out;
 }
-
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+}
 .login-button {
     color: white;
     border: none;
     background-color: #D1709E;
-    box-shadow: 0px 0px 6px#D1709E;
+    box-shadow: 0px 0px 6px #D1709E;
 }
 
 .create-button {
     color: #D1709E;
     border: 3px solid #D1709E;
-    box-shadow: 0px 0px 6px#D1709E;
+    box-shadow: 0px 0px 6px #D1709E;
 }
 
 /* Animation */

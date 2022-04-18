@@ -89,4 +89,5 @@
 .chosen {
     font-weight: 700;
     color: rgb(144, 223, 170);
+    border: 3px solid rgb(144, 223, 170);
 }

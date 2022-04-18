@@ -1,0 +1,115 @@
+.investments-container {
+    position: absolute;
+    right: 9vw;
+    top: 25vh;
+    height: 60vh;
+    width: 60vw;
+    border-radius: 1.5rem;
+    color: white;
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.3),
+    inset 0px 0px 15px #3340558c;
+    padding: 1rem;
+    overflow: scroll;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.table {
+    width: 100%;
+    margin: 2rem;
+    border-collapse: collapse;
+}
+
+.sell-button{
+    width: 3rem;
+    height: 2rem;
+    color: white;
+    font-size: 1rem;
+    font-weight: 200;
+    border: 2px solid rgb(144, 223, 170);
+    transition: .25s ease-in-out;
+}
+
+.sell-button:hover {
+    background-color: rgb(144, 223, 170);
+    cursor: pointer;
+}
+
+.row{
+    font-size: 1rem;
+    text-align: center;
+    font-weight: 300;
+}
+
+
+.row-data {
+    font-size: 1rem;
+    font-weight: 300;
+} 
+
+.row {
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}
+
+thead {
+    border-bottom: 1px solid white;
+    margin-bottom: 2vh;
+    background-color: #161c2ccc;
+    height: 5vh;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);
+}
+
+th {
+    
+    font-weight: 300;
+}
+
+tbody tr{
+    height: 6vh;
+    justify-content: center;
+}
+
+.display-flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.green-text { color : rgb(144, 223, 170); }
+.red-text { color:  red; }
+
+.friend-investments {
+    overflow: scroll;
+}
+
+.table{
+    margin: 0;
+    padding: 0;
+    width: 55vw;
+    text-align:center;
+    margin: 2vh;
+}
+td{
+    text-align: center;
+}
+
+
+.investments-header {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.info-container {
+    box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.453);
+    padding: 1rem;
+    width: 15vw;
+    text-align: center;
+    border-radius: 1rem;
+}
