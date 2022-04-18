@@ -13,23 +13,36 @@ export default function Databar({user}) {
     const[accountValue, setAccountValue] = useState(0);
     const[todayChange, setTodayChange] = useState(0);
     const[changeRate, setChangeRate] = useState(0);
+    const[cash, setCash] = useState(user.cash);
     const[ownedStocks, setOwnStocks] = useState(JSON.parse(localStorage.getItem('stocks')));
     const dispatch = useDispatch();
 
-    // useEffect(() => {
-    //     setAccountValue(prev => prev + user.cash);
-    //     
-    // }, []);
+    useEffect(() => {
+        setAccountValue(prev => prev + user.cash);
+        
+    }, []);
 
-    useEffect(async () => {
-        // let symbols = "";
-        // user.stocks.forEach((stock) => {
-        //     symbols += "," + stock.symbol;
-        // });
-        // let symbolString = symbols.substring(1,);
-        // await axios.post("http://localhost:3001/get-prices", {symbolString}).then((res) => {
-        //     dispatch(updatePrices(res.data.quoteResponse.result));
-        // });
+    // const fetchData = async () => {
+    //     let symbols = "";
+    //     user.stocks.forEach((stock) => {
+    //         symbols += "," + stock.symbol;
+    //     });
+    //     let symbolString = symbols.substring(1,);
+    //     console.log(symbolString)
+    //     await axios.post("http://localhost:3001/get-prices", {symbolString}).then((res) => {
+    //             dispatch(updatePrices(res.data.quoteResponse.result));
+    //             console.log(res);
+
+    //     });
+    // }
+
+    // useEffect(() => { fetchData(); }, [user]); 
+    useEffect(() => {setCash(user.cash)}, [user]);
+
+    
+
+    useEffect(() => {
+        
         let totalValue = user.cash;
         let local_today_change = 0;
         user.stocks.forEach((stock) => {
@@ -38,16 +51,17 @@ export default function Databar({user}) {
             for(var key in ownedStocks) {
                 if(ownedStocks[key].symbol === stock.symbol){
                     currentPrice = ownedStocks[key].ask;
+                    console.log(currentPrice);
                     local_today_change += (quantity * (currentPrice - ownedStocks[key].preMarketPrice))
                     break;
                 }
             }
-            console.log("Account Value: " + accountValue);
+            console.log("Account Value: " + totalValue);
             totalValue += (quantity*currentPrice);
         });
         setAccountValue(totalValue);
         setTodayChange(local_today_change);
-    }, []);
+    }, [ownedStocks])
 
     useEffect(() => {
         setChangeRate(((accountValue-100000)/100000)*100);
@@ -65,17 +79,19 @@ export default function Databar({user}) {
             value={accountValue} 
             displayType={'text'} 
             thousandSeparator={true} 
+            decimalScale={2}
             prefix={'$'}
             renderText={value => <p className={"value-text" + (accountValue>100000?" green-text":" red-text")}>{accountValue > 100000?<ArrowDropUpIcon /> : <ArrowDropDownOutlinedIcon />} {value}</p>}  /> 
         </div>
         <div>
             <p className="value-title">Cash:</p>
             <CurrencyFormat 
-                value={user.cash} 
+                value={cash} 
                 displayType={'text'} 
                 thousandSeparator={true} 
+                decimalScale={2}
                 prefix={'$'}
-                renderText={value => <p className={"value-text" + (user.cash>100000?" green-text":" red-text")}> {user.cash > 100000?<ArrowDropUpIcon /> : <ArrowDropDownOutlinedIcon />} {value}</p>}  /> 
+                renderText={value => <p className={"value-text" + (cash>100000?" green-text":" red-text")}> {cash > 100000?<ArrowDropUpIcon /> : <ArrowDropDownOutlinedIcon />} {value}</p>}  /> 
         
         </div>
         <div>
