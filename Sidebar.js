@@ -27,8 +27,8 @@ export default function Sidebar({username}) {
 
             <div className="buttons-container">
                 <button 
-                className={"section-button" + (section==='performance'?" chosen":"")}
-                onClick={() => {navigate('/dashboard/performance')}}
+                className={"section-button" + (section==='portfolio'?" chosen":"")}
+                onClick={() => {navigate('/dashboard/portfolio')}}
                 >Portfolio</button>
                 <button 
                 className={"section-button" + (section==='trade'?" chosen":"")}
