@@ -3,7 +3,6 @@ const express = require("express");
 const cors = require('cors');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const finnhub = require('finnhub');
 const https = require('https');
 var axios = require("axios").default;
 
@@ -46,6 +45,28 @@ app.post('/search-company-name', (req, res) => {
     })
 });
 
+app.post('/search-users', (req, res) => {
+    const val = "^"+req.body.name;
+    User.find({Name: {$regex : new RegExp(val), $options: 'i'}}).limit(10).then((result) => {
+        res.send(result);
+    }).catch((error) => {
+        console.log(error.message)
+    })
+});
+
+
+
+app.post('/search-user-by-name', (req, res) => {
+   
+    User.findOne({username: req.body.name}).then((result) => {
+        res.send(result);
+    }).catch((error) => {
+        console.log(error.message)
+    })
+});
+
+
+
 app.post('/search-company-symbol', (req, res) => {
     const val = "^"+req.body.symbol;
     Company.find({Symbol: {$regex: new RegExp(val), $options: 'i'}}).limit(10).then((result) => {
@@ -58,42 +79,58 @@ app.post('/search-company-symbol', (req, res) => {
 
 
 
+
+
 app.post('/purchase-stock', (req, res) => {
-
-    const user = new User({
-        email: 'assaad.ziade@lau.edu',
-        password: 'lau@2018',
-        username: 'Leon', 
-        cash: 100000,
-        stocks: []
-    });
-    user.save(function (err, user) {
-      if (err) return console.error(err);
-      console.log(user.username + " saved to database.");
-    })
-});
-
-app.post('/purchase-existing', (req, res) => {
     const stock = {
-        symbol: req.body.symbol,
-        quantity: req.body.quantity,
-        purchasePrice: req.body.stock.c };
+        symbol: req.body.basket.symbol,
+        quantity: req.body.basket.quantity,
+        purchasePrice: req.body.basket.purchasePrice 
+    };
 
-    const amount = req.body.quantity*req.body.stock.c;
+    let amount = req.body.basket.quantity*req.body.basket.purchasePrice;
 
-    User.findOneAndUpdate({username: "Leon"}, {
+
+    User.findOneAndUpdate({email: "assaad.ziade@lau.edu"}, {
         $push: {stocks: stock},
         $inc: { cash: -amount } 
-    }, function (error, success) {
-        if (error) {
-            console.log("Error");
-        } else {
-            console.log("Success");
-        }
+    },{new: true},(error, doc) => {
+        if(error) console.log("Error: " + error);
+        res.send(doc);
     });
 })
 
 
+app.post('/sell-stock', (req, res) => {
+    const amount = req.body.quantity*req.body.sale.ask;
+    console.log("Amount: " + amount + "\nSymbol: " + req.body.sale.symbol + "\nQuantity: " + req.body.quantity);
+
+    User.findOneAndUpdate({email: "assaad.ziade@lau.edu", "stocks.symbol": req.body.sale.symbol, "stocks.purchasePrice": req.body.sale.purchasePrice}, {
+        $inc: {"stocks.$.quantity": -req.body.quantity, cash: amount}
+    },{new: true},(error, doc) => {
+        if(error) console.log("Error: " + error);
+        res.send(doc);
+    });
+})
+
+
+
+app.post('/sell-all-stock', (req, res) => {
+    
+    const amount = req.body.quantity * req.body.sale.ask;
+    const symbol = req.body.sale.symbol;
+    const purchasePrice = req.body.sale.purchasePrice;
+    console.log("Amount: " + amount + "\nSymbol : " + symbol + "\nPurchase Price: " + purchasePrice);
+
+    User.findOneAndUpdate({email: "assaad.ziade@lau.edu"}, {
+        $pull: {stocks: { symbol: symbol , purchasePrice: purchasePrice }},
+        $inc: { cash: amount } 
+    },{new: true},(error, doc) => {
+        console.log(doc);
+        if(error) console.log("Error: " + error);
+        res.send(doc);
+    });
+})
 
 //User Authentication:
 
@@ -224,3 +261,16 @@ app.get("/market-status", (req, res) => {
     });
 })
 
+
+app.post('/save-new-user', (req, res) => {
+    const newUser = {
+        email: req.body.email,
+        password: req.body.password,
+        username: req.body.username
+    }
+
+    User.save(newUser).then((response) => res.send(response)
+    ).catch((error) => {
+        console.log(error);
+    })
+})
