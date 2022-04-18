@@ -7,6 +7,7 @@ export const stockSlice = createSlice({
   },
   reducers: {
     updatePrices: (state, action) => {
+        console.log("Hello World");
         localStorage.setItem('stocks', JSON.stringify({ ...action?.payload}));
         state.stocks = action.payload
     },
