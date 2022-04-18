@@ -43,6 +43,17 @@ export default function LoginForm() {
       )
     }
 
+    const handleSignUp = () => {
+
+      axios.post("http://localhost:3001/save-new-user", {
+        username : username,
+        email: email,
+        password: password
+      }).then((res) => {
+        console.log(res);
+      })
+    }
+
     useEffect(() => {
       if(password !== passwordClone && !passwordError) setPasswordError(true);
       else if(password === passwordClone) setPasswordError(false);
@@ -191,7 +202,7 @@ export default function LoginForm() {
 
       <div className="login-buttons">
         <button className="create-button" 
-        onClick={handleCreateAccount}
+        onClick={handleSignUp}
         >Create Account</button>
         <button 
         className="login-button"
